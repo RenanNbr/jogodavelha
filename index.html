@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Velha</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Jogo da Velha</h1>
+        <p>Escolha o tamanho do tabuleiro e o modo de jogo!</p>
+    </header>
+    
+    <main>
+        <div>
+            <label for="size">Escolha o tamanho do tabuleiro:</label>
+            <select id="size">
+                <option value="3">3x3</option>
+                <option value="6">6x6</option>
+                <option value="9">9x9</option>
+            </select>
+        </div>
+        <div>
+            <label for="mode">Escolha o modo de jogo:</label>
+            <select id="mode">
+                <option value="dupla">Dupla</option>
+                <option value="solo">Solo</option>
+            </select>
+        </div>
+        <button id="start">Iniciar Jogo</button>
+        <div id="board" class="board"></div>
+        <div id="message" class="message"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Jogo da Velha. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
