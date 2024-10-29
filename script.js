@@ -2,6 +2,7 @@ let boardSize;
 let board;
 let currentPlayer;
 let gameMode;
+let somClik = document.getElementById('SongClik');
 
 document.getElementById('start').addEventListener('click', () => {
     boardSize = parseInt(document.getElementById('size').value);
@@ -35,21 +36,25 @@ function createBoard() {
 function handleCellClick(row, col) {
     if (board[row][col] || checkWinner()) return;
 
+    // Reproduzir o som ao clicar na célula
+    somClik.currentTime = 0; // Reinicia o som se já estiver tocando
+    somClik.play();
+
     board[row][col] = currentPlayer;
     updateBoard();
-    
+
     if (checkWinner()) {
         displayMessage(`Jogador ${currentPlayer} ganhou!`);
         return;
     }
-    
+
     if (isBoardFull()) {
         displayMessage('Empate!');
         return;
     }
-    
+
     currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-    
+
     if (gameMode === 'solo' && currentPlayer === 'O') {
         computerMove();
     }
@@ -70,17 +75,17 @@ function computerMove() {
         const [row, col] = emptyPositions[Math.floor(Math.random() * emptyPositions.length)];
         board[row][col] = currentPlayer;
         updateBoard();
-        
+
         if (checkWinner()) {
             displayMessage(`Jogador ${currentPlayer} ganhou!`);
             return;
         }
-        
+
         if (isBoardFull()) {
             displayMessage('Empate!');
             return;
         }
-        
+
         currentPlayer = 'X'; // Volta para o jogador humano
     }
 }
@@ -104,23 +109,23 @@ function checkWinner() {
             return true;
         }
     }
-    
+
     // Check columns
     for (let i = 0; i < boardSize; i++) {
         if (board.every(row => row[i] === currentPlayer)) {
             return true;
         }
     }
-    
+
     // Check diagonals
     if (board.every((row, i) => row[i] === currentPlayer)) {
         return true;
     }
-    
+
     if (board.every((row, i) => row[boardSize - 1 - i] === currentPlayer)) {
         return true;
     }
-    
+
     return false;
 }
 
